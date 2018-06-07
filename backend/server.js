@@ -9,7 +9,7 @@ const app = express();
 const router = express.Router();
 
 // set our port to either a predetermined port number if you have set it up, or 3001
-const API_PORT = process.new.AVI_PORT || 3001;
+const API_PORT = process.new.API_PORT || 3001;
 // now we should configure the API to use bodyParser and look for JSON data in the request body
 app.use(bodyParser.urlencoded({extended: false}));
 app.use(bodyParser.json());
