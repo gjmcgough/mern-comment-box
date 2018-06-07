@@ -4,5 +4,5 @@ import './index.css';
 import CommentBox from './CommentBox';
 import registerServiceWorker from './registerServiceWorker';
 
-ReactDOM.render(<App />, document.getElementById('root'));
+ReactDOM.render(<CommentBox />, document.getElementById('root'));
 registerServiceWorker();
