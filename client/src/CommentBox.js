@@ -75,9 +75,34 @@ class CommentBox extends Component {
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({ author, text }),
     }).then(res => res.json()).then((res) => {
-      if (!res.success) this.setState({ error: res.error.message || res.error });
-      else this.setState({ author: '', text: '', error: null });
+      if (!res.success) {
+        this.setState({ error: res.error.message || res.error });
+      }
+      else {
+        this.setState({ author: '', text: '', error: null });
+        this.updateServiceNow();
+      }
     });
+  }
+
+  updateServiceNow = () => {
+    var requestBody = "{\"comments\":\"Updating from my 3rd party comment app\"}";
+
+    var client=new XMLHttpRequest();
+    client.open("put","https://gregmcg.service-now.com/api/now/table/incident/6d4342fcdba2d300f4917bfdae9619ca");
+
+    client.setRequestHeader('Accept','application/json');
+    client.setRequestHeader('Content-Type','application/json');
+
+    //Eg. UserName="admin", Password="admin" for this code sample.
+    client.setRequestHeader('Authorization', 'Basic '+btoa('admin'+':'+'admin'));
+
+    // client.onreadystatechange = function() {
+    // 	if(this.readyState == this.DONE) {
+    // 		document.getElementById("response").innerHTML=this.status + this.response;
+    // 	}
+    // };
+    client.send(requestBody);
   }
 
   submitUpdatedComment = () => {
