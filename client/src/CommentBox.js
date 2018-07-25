@@ -79,15 +79,17 @@ class CommentBox extends Component {
         this.setState({ error: res.error.message || res.error });
       }
       else {
-        this.setState({ author: '', text: '', error: null });
         this.updateServiceNow();
       }
     });
   }
 
   updateServiceNow = () => {
-    var requestBody = "{\"comments\":\"Updating from my 3rd party comment app\"}";
+    const { author, text } = this.state;
+    console.log(text);
+    var requestBody = JSON.stringify({ comments: text });
 
+    this.setState({ author: '', text: '', error: null });
     var client=new XMLHttpRequest();
     client.open("put","https://gregmcg.service-now.com/api/now/table/incident/6d4342fcdba2d300f4917bfdae9619ca");
 
