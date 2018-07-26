@@ -87,7 +87,10 @@ class CommentBox extends Component {
   updateServiceNow = () => {
     const { author, text } = this.state;
     console.log(text);
-    var requestBody = JSON.stringify({ comments: text });
+    var requestBody = JSON.stringify({
+      comments: text,
+      caller_id: author,
+     });
 
     this.setState({ author: '', text: '', error: null });
     var client=new XMLHttpRequest();
