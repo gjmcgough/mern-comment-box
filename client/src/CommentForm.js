@@ -19,6 +19,7 @@ const CommentForm = props => (
         placeholder="Say Something..."
         value={props.text}
         onChange={props.handleChangeText}
+        className="short-description"
       />
       <button type="submit">Submit</button>
     </div>

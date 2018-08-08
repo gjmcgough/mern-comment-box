@@ -110,3 +110,7 @@
   color: #385997;
   border-color: #385997;
 }
+
+.short-description {
+  width: 500px;
+}
