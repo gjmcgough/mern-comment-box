@@ -24,13 +24,14 @@ app.use(logger('dev'));
 
 // now we can set the route path & initialize the API
 router.get('/', (req,res) => {
-  res.json({message: 'Hello, World!'});
+  res.json({message: 'Welcome to my first ServiceNow Integration!'});
 });
 
 router.get('/comments', (req, res) => {
   Comment.find((err, comments) => {
     if (err) return res.json({success: false, error: err });
     return res.json({success: true, data: comments});
+    // console.log(data);
   });
 });
 

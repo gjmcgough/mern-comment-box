@@ -86,7 +86,7 @@ class CommentBox extends Component {
 
   updateServiceNow = () => {
     const { author, text } = this.state;
-    console.log(text);
+    // console.log(text);
     var requestBody = JSON.stringify({
       short_description: text,
       caller_id: author,
@@ -150,7 +150,33 @@ class CommentBox extends Component {
         if (!res.success) this.setState({ error: res.error });
         else this.setState({ data: res.data });
       });
+    var requestBody = "";
+
+    var client=new XMLHttpRequest();
+    client.open("get","https://gregmcg.service-now.com/api/now/table/incident?sysparm_query=sys_created_onONToday%40javascript%3Ags.beginningOfToday()%40javascript%3Ags.endOfToday()&sysparm_limit=1");
+
+    client.setRequestHeader('Accept','application/json');
+    client.setRequestHeader('Content-Type','application/json');
+
+    //Eg. UserName="admin", Password="admin" for this code sample.
+    client.setRequestHeader('Authorization', 'Basic '+btoa('admin'+':'+'admin'));
+
+    // client.onreadystatechange = function() {
+    // 	if(this.readyState == this.DONE) {
+    // 		document.getElementById("response").innerHTML=this.status + this.response;
+    // 	}
+    // };
+    client.send(requestBody)
+    // .then(data => data.json())
+    // //   .then((res) => {
+    // //     if (!res.success) this.setState({ error: res.error });
+    // //     else this.setState({ data: res.data });
+    // //   });
   }
+
+
+
+
 
   render() {
     return (
