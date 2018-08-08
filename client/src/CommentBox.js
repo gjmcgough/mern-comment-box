@@ -21,7 +21,7 @@ class CommentBox extends Component {
   componentDidMount() {
     this.loadCommentsFromServer();
     if (!this.pollInterval) {
-      this.pollInterval = setInterval(this.loadCommentsFromServer, 2000);
+      this.pollInterval = setInterval(this.loadCommentsFromServer, 10000);
     }
   }
 
@@ -156,7 +156,7 @@ class CommentBox extends Component {
     return (
       <div className="container">
         <div className="comments">
-          <h2>Comments:</h2>
+          <h2>Incidents created:</h2>
           <CommentList
             data={this.state.data}
             handleDeleteComment={this.onDeleteComment}

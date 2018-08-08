@@ -3,21 +3,25 @@ import PropTypes from 'prop-types';
 
 const CommentForm = props => (
   <form onSubmit={props.submitComment}>
-    <input
-      type="text"
-      name="author"
-      placeholder="Your name..."
-      value={props.author}
-      onChange={props.handleChangeText}
-    />
-    <input
-      type="text"
-      name="text"
-      placeholder="Say Something..."
-      value={props.text}
-      onChange={props.handleChangeText}
-    />
-    <button type="submit">Submit</button>
+    <div className="textContent">
+      <h4>What is your name?</h4>
+      <input
+        type="text"
+        name="author"
+        placeholder="Your name..."
+        value={props.author}
+        onChange={props.handleChangeText}
+      />
+      <h4>Please provide a brief description of your issue.</h4>
+      <input
+        type="text"
+        name="text"
+        placeholder="Say Something..."
+        value={props.text}
+        onChange={props.handleChangeText}
+      />
+      <button type="submit">Submit</button>
+    </div>
   </form>
 );
 
