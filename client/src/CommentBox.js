@@ -87,28 +87,52 @@ class CommentBox extends Component {
   updateServiceNow = () => {
     const { author, text } = this.state;
     console.log(text);
-    var requestBody = JSON.stringify({
-      comments: text,
-      caller_id: author,
-     });
+    // var requestBody = JSON.stringify({
+    //   comments: text,
+    //   caller_id: author,
+    //  });
+    //
+    // this.setState({ author: '', text: '', error: null });
+    // var client=new XMLHttpRequest();
+    // client.open("put","https://gregmcg.service-now.com/api/now/table/incident/6d4342fcdba2d300f4917bfdae9619ca");
+    //
+    // client.setRequestHeader('Accept','application/json');
+    // client.setRequestHeader('Content-Type','application/json');
+    //
+    // //Eg. UserName="admin", Password="admin" for this code sample.
+    // client.setRequestHeader('Authorization', 'Basic '+btoa('admin'+':'+'admin'));
+    //
+    // // client.onreadystatechange = function() {
+    // // 	if(this.readyState == this.DONE) {
+    // // 		document.getElementById("response").innerHTML=this.status + this.response;
+    // // 	}
+    // // };
+    // client.send(requestBody);
 
-    this.setState({ author: '', text: '', error: null });
+    var requestBody = JSON.stringify({
+      first_name: author,
+      email: "guest@service-now.com",
+      short_description: text,
+    });
+
     var client=new XMLHttpRequest();
-    client.open("put","https://gregmcg.service-now.com/api/now/table/incident/6d4342fcdba2d300f4917bfdae9619ca");
+    client.open("post","https://gregmcg.service-now.com/api/now/connect/support/anonymous/queues/3a40c019c333120071d07bfaa2d3ae17/sessions");
 
     client.setRequestHeader('Accept','application/json');
     client.setRequestHeader('Content-Type','application/json');
 
     //Eg. UserName="admin", Password="admin" for this code sample.
-    client.setRequestHeader('Authorization', 'Basic '+btoa('admin'+':'+'admin'));
+    client.setRequestHeader('Authorization', 'Basic '+btoa('guest'+':'+'guest'));
 
-    // client.onreadystatechange = function() {
-    // 	if(this.readyState == this.DONE) {
-    // 		document.getElementById("response").innerHTML=this.status + this.response;
-    // 	}
-    // };
+    client.onreadystatechange = function() {
+    	if(this.readyState == this.DONE) {
+    		document.getElementById("response").innerHTML=this.status + this.response;
+    	}
+    };
     client.send(requestBody);
   }
+
+
 
   submitUpdatedComment = () => {
     const { author, text, updateId } = this.state;
