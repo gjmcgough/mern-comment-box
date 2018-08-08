@@ -144,39 +144,58 @@ class CommentBox extends Component {
   loadCommentsFromServer = () => {
     // fetch returns a promise. If you are not familiar with promises, see
     // https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Promise
-    fetch('/api/comments/')
-      .then(data => data.json())
-      .then((res) => {
-        if (!res.success) this.setState({ error: res.error });
-        else this.setState({ data: res.data });
-      });
-    var requestBody = "";
+    // fetch("https://gregmcg.service-now.com/api/now/table/incident?sysparm_query=caller_id%3D5137153cc611227c000bbd1bd8cd2005&sysparm_fields=caller_id%2Cnumber%2Cpriority%2Cshort_description&sysparm_limit=1")
+    //   .then(data => data.json())
+    //   .then((res) => {
+    //     // if (!res.success) this.setState({ error: res.error });
+    //     this.setState({ data: res.data });
+    //   });
 
-    var client=new XMLHttpRequest();
-    client.open("get","https://gregmcg.service-now.com/api/now/table/incident?sysparm_query=sys_created_onONToday%40javascript%3Ags.beginningOfToday()%40javascript%3Ags.endOfToday()&sysparm_limit=1");
 
-    client.setRequestHeader('Accept','application/json');
-    client.setRequestHeader('Content-Type','application/json');
+      var myHeaders = new Headers();
 
-    //Eg. UserName="admin", Password="admin" for this code sample.
-    client.setRequestHeader('Authorization', 'Basic '+btoa('admin'+':'+'admin'));
+      myHeaders.append('Accept','application/json');
+      myHeaders.append('Content-Type','application/json');
+      myHeaders.append('Authorization', 'Basic '+btoa('admin'+':'+'admin'));
 
-    // client.onreadystatechange = function() {
-    // 	if(this.readyState == this.DONE) {
-    // 		document.getElementById("response").innerHTML=this.status + this.response;
-    // 	}
-    // };
-    client.send(requestBody)
-    // .then(data => data.json())
-    // //   .then((res) => {
-    // //     if (!res.success) this.setState({ error: res.error });
-    // //     else this.setState({ data: res.data });
-    // //   });
-  }
+      var myInit = { method: 'GET',
+                     headers: myHeaders,
+                     mode: 'cors',
+                     cache: 'default' };
 
+      var myRequest = new Request("https://gregmcg.service-now.com/api/now/table/incident?sysparm_query=caller_id%3D5137153cc611227c000bbd1bd8cd2005&sysparm_fields=caller_id%2Cnumber%2Cpriority%2Cshort_description&sysparm_limit=1", myInit);
+
+      fetch(myRequest)
+        .then(data => data.json())
+          .then((res) => {
+            // if (!res.success) this.setState({ error: res.error });
+            console.log(res.result);
+            this.setState({ data: res.result });
+          });
 
 
 
+
+
+    // var requestBody = "";
+    // // var XMLHttpRequest = require("xmlhttprequest").XMLHttpRequest;
+    // var client=new XMLHttpRequest();
+    // client.open("get",);
+    //
+    // client.setRequestHeader('Accept','application/json');
+    // client.setRequestHeader('Content-Type','application/json');
+    //
+    // //Eg. UserName="admin", Password="admin" for this code sample.
+    // client.setRequestHeader('Authorization', 'Basic '+btoa('admin'+':'+'admin'));
+    //
+    // // client.onreadystatechange = function() {
+    // // 	if(this.readyState == this.DONE) {
+    // // 		document.getElementById("response").innerHTML=this.status + this.response;
+    // // 	}
+    // // };
+    //
+    // client.send()
+  };
 
   render() {
     return (

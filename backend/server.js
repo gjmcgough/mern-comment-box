@@ -33,6 +33,26 @@ router.get('/comments', (req, res) => {
     return res.json({success: true, data: comments});
     // console.log(data);
   });
+
+  var requestBody = "";
+  var XMLHttpRequest = require("xmlhttprequest").XMLHttpRequest;
+  var client=new XMLHttpRequest();
+  client.open("get","https://gregmcg.service-now.com/api/now/table/incident?sysparm_query=caller_id%3D5137153cc611227c000bbd1bd8cd2005&sysparm_fields=caller_id%2Cnumber%2Cpriority%2Cshort_description&sysparm_limit=1");
+
+  client.setRequestHeader('Accept','application/json');
+  client.setRequestHeader('Content-Type','application/json');
+
+  //Eg. UserName="admin", Password="admin" for this code sample.
+  client.setRequestHeader('Authorization', 'Basic '+btoa('admin'+':'+'admin'));
+
+  // client.onreadystatechange = function() {
+  // 	if(this.readyState == this.DONE) {
+  // 		document.getElementById("response").innerHTML=this.status + this.response;
+  // 	}
+  // };
+  client.send(requestBody);
+  return res;
+
 });
 
 router.post('/comments', (req, res) => {
