@@ -169,7 +169,7 @@ class CommentBox extends Component {
         .then(data => data.json())
           .then((res) => {
             // if (!res.success) this.setState({ error: res.error });
-            console.log(res.result);
+            console.log(res.result[0].number);
             this.setState({ data: res.result });
           });
 
