@@ -37,7 +37,7 @@ router.get('/comments', (req, res) => {
   var requestBody = "";
   var XMLHttpRequest = require("xmlhttprequest").XMLHttpRequest;
   var client=new XMLHttpRequest();
-  client.open("get","https://gregmcg.service-now.com/api/now/table/incident?sysparm_query=caller_id%3D5137153cc611227c000bbd1bd8cd2005&sysparm_fields=caller_id%2Cnumber%2Cpriority%2Cshort_description&sysparm_limit=1");
+  client.open("get","https://gregmcg.service-now.com/api/now/table/incident?sysparm_display_value=true&sysparm_fields=number%2Ccaller_id%2Cshort_description%2Cpriority&sysparm_limit=10");
 
   client.setRequestHeader('Accept','application/json');
   client.setRequestHeader('Content-Type','application/json');

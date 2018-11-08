@@ -1,0 +1,12 @@
+Script started on Sat Oct  6 05:59:01 2018
+[?1034hbash-3.2$ 
+bash-3.2$ quit
+bash: quit: command not found
+bash-3.2$ q
+bash: q: command not found
+bash-3.2$ exig
+bash: exig: command not found
+bash-3.2$ exit
+exit
+
+Script done on Sat Oct  6 06:00:40 2018

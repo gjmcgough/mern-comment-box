@@ -5,15 +5,15 @@ import Comment from './Comment';
 const CommentList = (props) => {
   const commentNodes = props.data.map(comment => (
     <Comment
-      author={comment.caller_id}
+      author={comment.author}
+      text={comment.short_description}
+      number={comment.number}
       key={comment._id}
       id={comment._id}
-      timestamp={comment.updatedAt}
       handleUpdateComment={props.handleUpdateComment}
       handleDeleteComment={props.handleDeleteComment}
     >
-      Incident Number: {comment.number}
-      Description: {comment.short_description}
+      {comment.text}
     </Comment>
   ));
   return (

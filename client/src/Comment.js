@@ -9,8 +9,8 @@ const Comment = props => (
     <img alt="user_image" className="userImage" src={`https://picsum.photos/70?random=${props.id}`} />
     <div className="textContent">
       <div className="singleCommentContent">
-        <h3>{props.author}</h3>
-        <ReactMarkdown source={props.children} />
+        <h3>{props.number} opened for {props.author} to address:</h3>
+        <ReactMarkdown source={props.text} />
       </div>
       <div className="singleCommentButtons">
         <span className="time">{moment(props.timestamp).fromNow()}</span>
@@ -23,7 +23,8 @@ const Comment = props => (
 
 Comment.propTypes = {
   author: PropTypes.string.isRequired,
-  children: PropTypes.string.isRequired,
+  number: PropTypes.number.isRequired,
+  text: PropTypes.string.isRequired,
   id: PropTypes.string.isRequired,
   handleUpdateComment: PropTypes.func.isRequired,
   handleDeleteComment: PropTypes.func.isRequired,

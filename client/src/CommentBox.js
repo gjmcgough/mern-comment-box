@@ -69,6 +69,7 @@ class CommentBox extends Component {
   submitNewComment = () => {
     const { author, text } = this.state;
     const data = [...this.state.data, { author, text, _id: Date.now().toString() }];
+    console.log(data);
     this.setState({ data });
     fetch('/api/comments', {
       method: 'POST',
@@ -111,7 +112,7 @@ class CommentBox extends Component {
 
 
     var client=new XMLHttpRequest();
-    client.open("post","https://gregmcg.service-now.com/api/now/table/incident");
+    client.open("post","https://gregmcg.service-now.com/api/now/table/incident?sysparm_display_value=true&sysparm_fields=number%2Ccaller_id%2Cshort_description%2Cpriority&sysparm_input_display_value=true");
 
     client.setRequestHeader('Accept','application/json');
     client.setRequestHeader('Content-Type','application/json');
@@ -163,18 +164,24 @@ class CommentBox extends Component {
                      mode: 'cors',
                      cache: 'default' };
 
-      var myRequest = new Request("https://gregmcg.service-now.com/api/now/table/incident?sysparm_query=caller_id%3D5137153cc611227c000bbd1bd8cd2005&sysparm_fields=caller_id%2Cnumber%2Cpriority%2Cshort_description&sysparm_limit=1", myInit);
+      var myRequest = new Request("https://gregmcg.service-now.com/api/now/table/incident?sysparm_query=sys_created_on%3E%3Djavascript%3Ags.dateGenerate('2018-11-07'%2C'15%3A10%3A00')&sysparm_display_value=true&sysparm_fields=number%2Ccaller_id%2Cshort_description%2Cpriority&sysparm_limit=10", myInit);
 
       fetch(myRequest)
         .then(data => data.json())
           .then((res) => {
             // if (!res.success) this.setState({ error: res.error });
-            console.log(res.result[0].number);
-            this.setState({ data: res.result });
+            console.log(res.result);
+            var input = res.result;
+            var output = Object.keys(input).map(function(key) {
+              return {
+                author: input[key].caller_id.display_value,
+                short_description: input[key].short_description,
+                number: input[key].number
+              };
+            });
+            console.log(output);
+            this.setState({ data: output });
           });
-
-
-
 
 
     // var requestBody = "";
